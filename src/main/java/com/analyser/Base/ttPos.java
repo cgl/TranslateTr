@@ -25,7 +25,7 @@ public class ttPos extends Phrases {
             if(getLabel().equals("NNS") | getLabel().equals("NNPS")) {
                 noun = noun.substring(0, noun.length() - 1);
             }
-            if(Lexicon.getNoun(noun) == null) System.out.println(noun);
+            if(Lexicon.getNoun(noun) == null) System.out.println("No noun with lemma: "+noun);
 
             setTranslation(Lexicon.getNoun(noun)+(plural ? "+lAr" : ""));
             return;

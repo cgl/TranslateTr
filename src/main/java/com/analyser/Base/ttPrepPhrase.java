@@ -1,5 +1,6 @@
 package com.analyser.Base;
 
+import com.analyser.Lexicons.Lexicon;
 import edu.stanford.nlp.trees.Tree;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
  */
 public class ttPrepPhrase extends Phrases {
     final Tree[] children;
+    final Tree root;
     private ArrayList<Phrases> phrases;
     String prep = null;
     public ttPrepPhrase(Tree tree) {
         super("PP");
+        this.root = tree;
         this.children = tree.children();
         this.phrases = new ArrayList<Phrases>();
     }
@@ -39,7 +42,21 @@ public class ttPrepPhrase extends Phrases {
 
     @Override
     public void translate() {
-        //System.out.println(phrases.toString());
+        //System.out.println(phrases.size()+" "+phrases.toString());
+        //root.pennPrint();
+        if(phrases.size() == 1)
+            return;
+
+        //System.out.println(prep+" "+((ttNounPhrase)phrases.get(1)).getText());
+        phrases.get(1).translate();
+        String trans = phrases.get(1).getTranslation();
+        if(((ttNounPhrase)phrases.get(1)).getText().startsWith("alignment")) {
+            setTranslation(trans+" "+ "hizada");
+            return;
+        }
+
+        setTranslation(trans+" "+ Lexicon.getPrep(prep));
+        //System.out.println(getTranslation());
     }
 
     @Override

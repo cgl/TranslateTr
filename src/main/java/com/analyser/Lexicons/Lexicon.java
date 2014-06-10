@@ -226,6 +226,21 @@ public class Lexicon {
         pronoun.put("it", "o");
         pronoun.put("they", "onlar");
     }
+
+    private static final HashMap<String,String> preposition = new HashMap<String,String>();
+    static {
+        preposition.put("in", "dA");
+        preposition.put("of", "In");
+        preposition.put("on", "Uzerinde");
+        preposition.put("with", "birlikte");
+        preposition.put("over", "Uzerinden");
+        preposition.put("towards", "doGru");
+        preposition.put("to", "doGru");
+        preposition.put("at", "dA");
+        preposition.put("into", "içine");
+
+    }
+
     private static final HashMap<String,String> collocation = new HashMap<String,String>();
     static {
         collocation.put("make sure" , "emin olmak" );
@@ -245,5 +260,9 @@ public class Lexicon {
 
     public static String getPRP(String lemma) {
         return pronoun.get(lemma.toLowerCase());
+    }
+
+    public static String getPrep(String lemma) {
+        return preposition.get(lemma.toLowerCase());
     }
 }

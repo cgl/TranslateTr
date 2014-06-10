@@ -24,6 +24,7 @@ public class Phrases {
     private String translation = null;
     public Phrases(String label) {
         this.label = label;
+        this.lemma = "";
     }
 
     public String getLabel() {
@@ -36,8 +37,9 @@ public class Phrases {
                 "label='" + label + '\'' +
                 '}';
     }
-    public void translate() {
 
+    public void translate() {
+        setTranslation(lemma);
     }
 
     public ArrayList<Phrases> getPhrases() {
@@ -51,4 +53,6 @@ public class Phrases {
     public String getLemma() {
         return lemma;
     }
+
+
 }

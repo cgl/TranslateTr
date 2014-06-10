@@ -20,6 +20,7 @@ public class ttNounPhrase extends Phrases{
         this.phrases = new ArrayList<Phrases>();
     }
 
+
     public void process() {
         //System.out.println("Noun Phrase processor");
         for (Tree child : children) {
@@ -63,16 +64,17 @@ public class ttNounPhrase extends Phrases{
             translateDT(npPhrase);
             return;
         }
-        else if(npPhrase.get(0).getLabel().equals("NP") | npPhrase.get(0).getLabel().equals("PP")) {
+        else if(npPhrase.size() > 1){
+         if(npPhrase.get(0).getLabel().equals("NP") & npPhrase.get(0).getLabel().equals("PP")) {
             translateNPPP(npPhrase);
             return;
             //System.out.println(this.getPhrases().size() + " " + this.toString());
-        }else if(npPhrase.get(0).getLabel().equals("JJ") | npPhrase.get(0).getLabel().startsWith("NN")) {
+        }else if(npPhrase.get(0).getLabel().equals("JJ") & npPhrase.get(1).getLabel().startsWith("NN")) {
             npPhrase.get(0).translate();
             npPhrase.get(1).translate();
             setTranslation(npPhrase.get(0).getTranslation()+" "+npPhrase.get(1).getTranslation());
             return;
-        }
+        } }
 
         //System.out.println(translation+" "+this.toString());
         for (Phrases phrase : phrases) {
@@ -103,6 +105,17 @@ public class ttNounPhrase extends Phrases{
         npPhrase.get(1).translate();
         npPhrase.get(2).translate();
         setTranslation(npPhrase.get(1).getTranslation()+aralik1+npPhrase.get(2).getTranslation()+"+I"+aralik2);
+    }
+
+    public String getText(){
+        StringBuilder b = new StringBuilder();
+        if(phrases == null | phrases.size() < 1)
+            return "";
+        for (Phrases phrase : phrases) {
+            b.append(phrase.getLemma());
+            b.append(" ");
+        }
+        return b.toString();
     }
 
     @Override
