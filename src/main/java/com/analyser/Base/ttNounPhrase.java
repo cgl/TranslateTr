@@ -65,10 +65,16 @@ public class ttNounPhrase extends Phrases{
             return;
         }
         else if(npPhrase.size() > 1){
-         if(npPhrase.get(0).getLabel().equals("NP") & npPhrase.get(0).getLabel().equals("PP")) {
-            translateNPPP(npPhrase);
-            return;
-            //System.out.println(this.getPhrases().size() + " " + this.toString());
+         if(npPhrase.get(0).getLabel().equals("NP") & npPhrase.get(1).getLabel().equals("PP")) {
+             translateNPPP(npPhrase);
+             return;
+             //System.out.println(this.getPhrases().size() + " " + this.toString());
+         }else if(npPhrase.get(0).getLabel().equals("NP") & npPhrase.get(1).getLabel().equals("VP")) {
+             npPhrase.get(1).translate();
+             npPhrase.get(0).translate();
+             setTranslation(npPhrase.get(1).getTranslation()+"+(mIS) "+npPhrase.get(0).getTranslation());
+             return;
+             //System.out.println(this.getPhrases().size() + " " + this.toString());
         }else if(npPhrase.get(0).getLabel().equals("JJ") & npPhrase.get(1).getLabel().startsWith("NN")) {
             npPhrase.get(0).translate();
             npPhrase.get(1).translate();
@@ -77,11 +83,14 @@ public class ttNounPhrase extends Phrases{
         } }
 
         //System.out.println(translation+" "+this.toString());
+        StringBuilder trans = new StringBuilder();
         for (Phrases phrase : phrases) {
             //System.out.println(" " + phrase.toString());
             phrase.translate();
-            setTranslation(phrase.getTranslation());
+            trans.append(phrase.getTranslation());
+            trans.append(" ");
         }
+        setTranslation(trans.toString());
     }
 
     private void translateNPPP(ArrayList<Phrases> npPhrase) {
@@ -91,20 +100,25 @@ public class ttNounPhrase extends Phrases{
     }
 
     private void translateDT(ArrayList<Phrases> npPhrase) {
-        String aralik1,aralik2 = "";
         if(npPhrase.size() == 2) { // DT NNS  Phrases{label='NNS'lemma='rollers'}
             npPhrase.get(1).translate();
             setTranslation(npPhrase.get(1).getTranslation()+"+I");
             return;
-        }else if (npPhrase.get(0).getLabel().startsWith("NN")){
-            aralik1 = "In ";
-            aralik2 = "nI";
-        }else{ //  DT JJ NN
-            aralik1 = " ";
+        }else {
+            String aralik1 = " ";
+            String aralik2 = "";
+            npPhrase.get(1).translate();
+            npPhrase.get(2).translate();
+            if (npPhrase.get(1).getLabel().startsWith("NN")) {  // DT NN NN
+                aralik1 = "+In ";
+                aralik2 = "+nI";
+            } else if (npPhrase.get(1).getLabel().startsWith("VB")) { //DT VBN NN
+                //System.out.println("[DT VBN NN]: "+ npPhrase.get(1).getTranslation()  + " " + this.toString());
+                //return;
+            } else { //  DT JJ NN
+            }
+            setTranslation(npPhrase.get(1).getTranslation() + aralik1 + npPhrase.get(2).getTranslation() + "+I" + aralik2);
         }
-        npPhrase.get(1).translate();
-        npPhrase.get(2).translate();
-        setTranslation(npPhrase.get(1).getTranslation()+aralik1+npPhrase.get(2).getTranslation()+"+I"+aralik2);
     }
 
     public String getText(){

@@ -14,7 +14,7 @@ public class Phrases {
     private String lemma;
 
     public String getTranslation() {
-        return translation;
+       return (translation != null) ? translation : "#";
     }
 
     public void setTranslation(String translation) {

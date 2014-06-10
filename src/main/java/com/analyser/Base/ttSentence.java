@@ -47,13 +47,16 @@ public class ttSentence extends Phrases{
                 NP.process();
                 phrases.add(NP);
                 first = NP;
-                //System.out.println(NP.getPhrases().size()+" "+NP.toString());
+                //System.out.println("NP child: "+NP.getPhrases().size()+" "+NP.toString());
             }
             else if(child.label().value().equals("INTJ")) {
+            }
+            else if(child.label().value().equals(".")) {
+                phrases.add(new Phrases(child.label().value()));
             }else  {
                 first = new Phrases(child.label().value());
                 phrases.add(first);
-                // SBAR and ADJP and . phrase
+                // SBAR and ADJP phrase
                 //System.out.println("Else: " + child.label().value()+" "+child.toString());
                 //child.pennPrint();
             }
@@ -65,10 +68,14 @@ public class ttSentence extends Phrases{
             first.translate();
             if(first.getLabel().equals("ADVP")) {
                 VB.translate(first.getTranslation());
-            }
-            else {
+            }else if(first.getLabel().equals("NP")) {
+                //System.out.println("[Sentence] NP child: " + first.toString() + first.getTranslation());
                 VB.translate();
-                super.setTranslation(first.getTranslation()+" "+VB.getTranslation()+phrases.get(phrases.size()-1).getLabel());
+                setTranslation(first.getTranslation()+" "+VB.getTranslation()+phrases.get(phrases.size()-1).getLabel());
+                return;
+            }else {
+                VB.translate();
+                setTranslation(first.getTranslation()+" "+VB.getTranslation()+phrases.get(phrases.size()-1).getLabel());
                 return;
             }
         }

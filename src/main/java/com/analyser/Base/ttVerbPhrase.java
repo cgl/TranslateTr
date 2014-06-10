@@ -113,8 +113,8 @@ public class ttVerbPhrase extends Phrases {
         return (md !=null ? md+"+" : "" )+Lexicon.getVerbs(verb)+ (plural ? "+(3rd)": "")+ (tense !=null ? "+"+tense : "" );
     }
     private String translateVerb(String advp) {
-        //System.out.println(verb+": "+Lexicon.getVerbs(verb)+" "+Verb.label());
-        String trans = (advp !=null ? Lexicon.getRB(advp) : "" ) + tVerb();
+        //System.out.println("[ttverb translate single] "+verb+": "+Lexicon.getVerbs(verb)+" "+Verb.label()+" trnas:"+tVerb());
+        String trans = (advp !=null ? Lexicon.getRB(advp) : "" ) + " " + tVerb();
         setTranslation(trans);
         return trans;
     }
@@ -151,13 +151,13 @@ public class ttVerbPhrase extends Phrases {
         }
         String pp_translate = null;
         String np_translate = null;
-
+        String vb_translate = null;
         for (Phrases phrase : phrases) {
             if(phrase.getLabel().equals("NP")) {
                 phrase.translate();
                 np_translate = phrase.getTranslation();
             }else if(phrase.getLabel().startsWith("VB")){
-                translateVerb(advp);
+                vb_translate = translateVerb(advp);
             }else if(phrase.getLabel().equals("PP")){
                  phrase.translate();
                 pp_translate = phrase.getTranslation();
@@ -167,7 +167,7 @@ public class ttVerbPhrase extends Phrases {
                 System.out.println(phrase.getLabel()+" "+((ttPos)phrase).getLemma());
             }
         }
-        this.setTranslation(((pp_translate != null) ? pp_translate+" ":"") + ((np_translate != null) ? np_translate+" ":"")+getTranslation());
+        this.setTranslation(((pp_translate != null) ? pp_translate+" ":"") + ((vb_translate != null) ? vb_translate+" ":"") +((np_translate != null) ? np_translate+" ":"")+getTranslation());
         //System.out.println("***********************");
     }
 }

@@ -15,6 +15,7 @@ public class Lexicon {
         verb.put("position", "yerleStirmek");
         verb.put("situate", "yerleStirmek");
         verb.put("raise", "yUkseltmek");
+        verb.put("raised", "yUkseltimiS");
         verb.put("put", "koymak");
         verb.put("lift", "kaldIrmak");
         verb.put("open", "aCmak");
@@ -132,54 +133,6 @@ public class Lexicon {
     public static String getVerbs(String engVerb){
          return verb.get(engVerb.toLowerCase());
     }
-    public void getVerbs(){
-        //this.verb = new HashMap<String,String>();
-        verb.put("is","dir");
-        verb.put("are","dirlar");
-        verb.put("adjust", "ayarlamak");
-        verb.put("set", "kurmak");
-        verb.put("insert", "sokmak");
-        verb.put("position", "yerleStirmek");
-        verb.put("situate", "yerleStirmek");
-        verb.put("raise", "yUkseltmek");
-        verb.put("put", "koymak");
-        verb.put("lift", "kaldIrmak");
-        verb.put("open", "aCmak");
-        verb.put("close", "kapatmak");
-        verb.put("clip", "klipslenmek");
-        verb.put("unlock", "aCmak");
-        verb.put("lock", "kitlemek");
-        verb.put("slide", "kaydIrmak");
-        verb.put("space", "konumlandIrmak");
-        verb.put("draw", "cizmek");
-        verb.put("show", "gOstermek");
-        verb.put("select", "seCmek");
-        verb.put("choose", "seCmek");
-        verb.put("be", "olmak");
-        verb.put("become", "olmak");
-        verb.put("place", "yerleStirmek");
-        verb.put("mark", "iSaretlemek");
-        verb.put("push", "itmek");
-        verb.put("pull", "cekmek");
-        verb.put("see", "bakmak");
-        verb.put("buy", "almak");
-        verb.put("sell", "satmak");
-        verb.put("draw", "cizmek");
-        verb.put("leave", "bIrakmak");
-        verb.put("fold", "katlamak");
-        verb.put("wait", "beklemek");
-        verb.put("go", "gitmek");
-        verb.put("make", "yapmak");
-        verb.put("do", "yapmak");
-        verb.put("use", "kullanmak");
-        verb.put("call", "aramak");
-        verb.put("try", "denemek");
-        verb.put("provide", "saGlamak");
-        verb.put("change", "deGiStirmek");
-        verb.put("update", "yenilemek");
-        verb.put("start", "baSlatmak");
-        verb.put("shift", "kaydIrmak");
-    }
 
     private static final HashMap<String,String> adverb = new HashMap<String,String>();
     static {
@@ -225,20 +178,47 @@ public class Lexicon {
     static {
         pronoun.put("it", "o");
         pronoun.put("they", "onlar");
+        pronoun.put("i", "ben");
+        pronoun.put("you", "sen");
     }
 
     private static final HashMap<String,String> preposition = new HashMap<String,String>();
     static {
-        preposition.put("in", "dA");
-        preposition.put("of", "In");
-        preposition.put("on", "Uzerinde");
+        preposition.put("in", "+dA");
+        preposition.put("of", "+In");
+        preposition.put("on", "üzerinde");
         preposition.put("with", "birlikte");
-        preposition.put("over", "Uzerinden");
-        preposition.put("towards", "doGru");
-        preposition.put("to", "doGru");
-        preposition.put("at", "dA");
+        preposition.put("over", "üzerinden");
+        preposition.put("towards", "doğru");
+        preposition.put("to", "doğru");
+        preposition.put("at", "+ndA");
         preposition.put("into", "içine");
+        preposition.put("along","boyunca");
+        preposition.put("for","için");
 
+    }
+
+    private static final HashMap<String,String> numeral = new HashMap<String,String>();
+    static {
+        numeral.put("one", "bir");
+        numeral.put("two", "iki");
+        numeral.put("three", "uC");
+        numeral.put("four", "dOrt");
+        numeral.put("five", "beS");
+        numeral.put("six", "altI");
+        numeral.put("seven", "yedi");
+        numeral.put("eight", "sekiz");
+        numeral.put("nine", "dokuz");
+        numeral.put("ten", "on");
+        numeral.put("1", "1");
+        numeral.put("2", "2");
+        numeral.put("3", "3");
+        numeral.put("4", "4");
+        numeral.put("5", "5");
+        numeral.put("6", "6");
+        numeral.put("7", "7");
+        numeral.put("8", "8");
+        numeral.put("9", "9");
     }
 
     private static final HashMap<String,String> collocation = new HashMap<String,String>();
@@ -264,5 +244,9 @@ public class Lexicon {
 
     public static String getPrep(String lemma) {
         return preposition.get(lemma.toLowerCase());
+    }
+
+    public static String getNum(String lemma) {
+        return numeral.get(lemma.toLowerCase());
     }
 }

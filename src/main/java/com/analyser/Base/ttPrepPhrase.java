@@ -43,15 +43,24 @@ public class ttPrepPhrase extends Phrases {
     @Override
     public void translate() {
         //System.out.println(phrases.size()+" "+phrases.toString());
-        //root.pennPrint();
-        if(phrases.size() == 1)
+        if (phrases.size() == 1)
             return;
 
-        //System.out.println(prep+" "+((ttNounPhrase)phrases.get(1)).getText());
         phrases.get(1).translate();
         String trans = phrases.get(1).getTranslation();
-        if(((ttNounPhrase)phrases.get(1)).getText().startsWith("alignment")) {
-            setTranslation(trans+" "+ "hizada");
+        if (prep.equals("in")) {
+            //root.pennPrint();
+            //System.out.println(trans + " " + ((ttNounPhrase) phrases.get(1)).getText());
+        }
+        if (((ttNounPhrase) phrases.get(1)).getText().startsWith("alignment")) {
+            setTranslation(trans + " " + "hizada");
+            return;
+        //} else if (phrases.get(1).getPhrases() != null)
+          //  System.out.println("PP subphrase " + prep + " " + phrases.get(1).getPhrases().size());
+
+        }else if(phrases.get(1).getPhrases()!=null & phrases.get(1).getPhrases().size() == 1 & prep.equals("in")) { //in place
+            //System.out.println("PP subphrase " + prep + " size:" + phrases.get(1).getPhrases().size());
+            setTranslation(trans+"+deki");
             return;
         }
 
