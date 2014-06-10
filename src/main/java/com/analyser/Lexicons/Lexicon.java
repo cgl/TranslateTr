@@ -56,6 +56,7 @@ public class Lexicon {
 
     private static final HashMap<String,String> noun = new HashMap<String,String>();
     static {
+        noun.put("seat","koltuk");
         noun.put("sprocket","diSli Cark");
         noun.put("paper", "kaGIt");
         noun.put("chute", "oluk");
@@ -220,6 +221,11 @@ public class Lexicon {
         adjective.put("technical", "teknik");
     }
 
+    private static final HashMap<String,String> pronoun = new HashMap<String,String>();
+    static {
+        pronoun.put("it", "o");
+        pronoun.put("they", "onlar");
+    }
     private static final HashMap<String,String> collocation = new HashMap<String,String>();
     static {
         collocation.put("make sure" , "emin olmak" );
@@ -236,4 +242,8 @@ public class Lexicon {
 
     public static String getCollocation(String col) {
         return collocation.get(col.toLowerCase());    }
+
+    public static String getPRP(String lemma) {
+        return pronoun.get(lemma.toLowerCase());
+    }
 }

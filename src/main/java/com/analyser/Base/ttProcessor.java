@@ -34,7 +34,7 @@ public class ttProcessor {
                 //System.out.println(text);
                 //System.out.println(this.sentence.toString());
                 this.sentence.translate();
-                System.out.println(this.sentence.getTranslation()+": "+text);
+                //System.out.println(this.sentence.getTranslation()+": "+text);
             }
             else if(tree.label().value().equals("FRAG")) {
                 System.out.println("TO DO[1]:"+tree.toString());
@@ -44,7 +44,6 @@ public class ttProcessor {
             else
                 System.out.println("Error[3]:"+tree.toString());
         }
-
     }
 
 

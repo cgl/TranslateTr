@@ -149,19 +149,25 @@ public class ttVerbPhrase extends Phrases {
             translateVerb(advp);
             return;
         }
+        String pp_translate = null;
+        String np_translate = null;
+
         for (Phrases phrase : phrases) {
             if(phrase.getLabel().equals("NP")) {
                 phrase.translate();
+                np_translate = phrase.getTranslation();
             }else if(phrase.getLabel().startsWith("VB")){
                 translateVerb(advp);
             }else if(phrase.getLabel().equals("PP")){
                  phrase.translate();
+                pp_translate = phrase.getTranslation();
             }else if(phrase.getLabel().equals("JJ")){
                 translateVerb(advp, phrase.getLemma());
             }else {
                 System.out.println(phrase.getLabel()+" "+((ttPos)phrase).getLemma());
             }
         }
+        this.setTranslation(((pp_translate != null) ? pp_translate+" ":"") + ((np_translate != null) ? np_translate+" ":"")+getTranslation());
         //System.out.println("***********************");
     }
 }
